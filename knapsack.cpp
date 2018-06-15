@@ -62,6 +62,18 @@ public:
         else cout << "ans:" << dp[pack_V] << endl;
     }
 
+    void knapsack_complete_1d(){
+        vector<int> dp(pack_V+1,0);
+
+        for(int i=1; i<=n; ++i){
+            for(int j=C[i-1]; j<=pack_V; ++j){ // careful, only difference from 01 to complete (1d)
+                dp[j] = max(dp[j], dp[j-C[i-1]]+W[i-1]);
+            }
+            print_row(dp);
+        }
+        cout << "ans:" << dp[pack_V] << endl; // get answer
+    }
+
 };
 
 int main () {
@@ -71,6 +83,8 @@ int main () {
     bp.knapsack01_1d();
     cout << "---" << endl;
     bp.knapsack01_1d_equal();
+    cout << "---" << endl;
+    bp.knapsack_complete_1d();
 
     return 0;
 }
